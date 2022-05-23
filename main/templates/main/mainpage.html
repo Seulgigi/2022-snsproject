@@ -28,18 +28,6 @@
                 <p style="font-size: 20px; margin-bottom: 30px;">slki1205@naver.com</p>
                 <p style="font-size: 20px; margin-bottom: 30px;">+82 2549 3017</p>
             </div>
-            <div>
-                <h2><a href="{% url 'main:new' %}">write</a></h2>
-                <h1>list</h1>
-                {% for blog in blogs %}
-                <div>
-                    <p>{{blog.title}}</p>
-                    {{blog.writer}}<br>
-                    {{blog.summary}}
-                    <a href="{% url 'main:detail' blog.id %}">...자세히</a><br>
-                </div>
-                {% endfor %}
-            </div>
         </div>
     </div>
 </body>
