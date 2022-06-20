@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>댓글 수정하기</h1>
+<form action="{% url 'main:update_comment' blog.id comment.id %}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    <p>내용 : <textarea name="body" id="" cols="30" rows="10">{{ blog.comment }}</textarea></p>
+    <button type="submit">제출</button>
+</form>
+
+{% endblock %}

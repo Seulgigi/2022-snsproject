@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
+from .models import Post, Comment
 from django.utils import timezone
 
 
@@ -16,7 +16,8 @@ def posts(request):
 
 def detail(request, id):
     blog = get_object_or_404(Post, pk = id)
-    return render(request, 'main/detail.html', {'blog':blog})
+    all_comments = blog.comments.all().order_by('-created_at')
+    return render(request, 'main/detail.html', {'blog':blog, 'comments_all':all_comments})
 
 def new(request) :
     return render(request, 'main/new.html')
@@ -49,3 +50,30 @@ def delete(request, id):
     delete_blog = Post.objects.get(id=id)
     delete_blog.delete()
     return redirect('main:posts')
+
+def create_comment(request, blog_id):
+    new_comment = Comment()
+    new_comment.writer = request.user
+    new_comment.content = request.POST['content']
+    new_comment.blog = get_object_or_404(Post, pk = blog_id)
+    new_comment.save() 
+    return redirect('main:detail', blog_id)
+
+def detail(request, id):
+    blog = get_object_or_404(Post, pk = id)
+    all_comments = blog.comments.all().order_by('-created_at')
+    return render(request, 'main/detail.html', {'blog':blog, 'comments':all_comments})
+
+def update_comment(request, blog_id, comment_id):
+    update_comment = Comment.objects.get(comment_id=comment_id)
+    update_comment.writer = request.user
+    update_comment.pub_date = timezone.now()
+    update_comment.content = request.POST['content']
+    update_comment.blog = get_object_or_404(Post, pk=blog_id)
+    update_comment.save()
+    return redirect('main:detail', update_comment.comment_id)
+
+def delete_comment(request, blog_id, comment_id):
+    delete_comment = Comment.objects.get(id=comment_id)
+    delete_comment.delete()
+    return redirect('main:detail', blog_id)

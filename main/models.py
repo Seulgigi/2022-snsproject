@@ -16,3 +16,10 @@ def __str__(self):
 
 def summary(self):
     return self.body[:10]
+
+class Comment(models.Model):
+    content = models.TextField()
+    writer = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey( Post ,on_delete=models.CASCADE, related_name ='comments')
+    created_at = models.DateTimeField(auto_now=True)
+    update_at = models.DateTimeField(auto_now=True)
