@@ -6,5 +6,5 @@ from django.contrib.auth.models import User
 def mypage(request):
     user = request.user
     
-    blogs=Post.objects.filter(writer=user)
-    return render(request,'users/mypage.html',{'blogs':blogs})
+    posts=Post.objects.filter(writer=user)
+    return render(request,'users/mypage.html',{'posts':posts})
