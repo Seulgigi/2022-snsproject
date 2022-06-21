@@ -78,6 +78,6 @@ def delete_comment(request, post_id, comment_id):
     delete_comment.delete()
     return redirect('main:detail', post_id)
 
-def edit_comment(request, id):
-    edit_comment = Comment.objects.get(id = id)
+def edit_comment(request, post_id, comment_id):
+    edit_comment = Comment.objects.get(post_id = post_id ,comment_id = comment_id)
     return render(request, 'main/edit_comment.html', {'post':edit_comment})
