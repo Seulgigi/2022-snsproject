@@ -20,6 +20,6 @@ def summary(self):
 class Comment(models.Model):
     content = models.TextField()
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey( Post ,on_delete=models.CASCADE, related_name ='comments')
-    created_at = models.DateTimeField(auto_now=True)
+    post = models.ForeignKey(Post ,on_delete=models.CASCADE, related_name ='comments')
+    created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
