@@ -42,8 +42,8 @@
             {% endif %}
             {{comment.content}}
     <br>
-    <a href="{% url 'main:update_comment' post.id comment.id %}">수정하기</a>
-    <a href="{% url 'main:delete_comment' post.id comment.id %}">삭제하기</a>
+    <a href="{% url 'main:update_comment' post.id comment.id %}" method="post">수정하기</a>
+    <a href="{% url 'main:delete_comment' post.id comment.id %}" method="post">삭제하기</a>
     <hr>
     </div>
     {% endfor %}

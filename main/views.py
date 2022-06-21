@@ -54,7 +54,7 @@ def delete(request, id):
 def create_comment(request, post_id):
     new_comment = Comment()
     new_comment.writer = request.user
-    new_comment.content = request.POST['content']
+    new_comment.content = request.Comment['content']
     new_comment.post = get_object_or_404(Post, pk = post_id)
     new_comment.save() 
     return redirect('main:detail', post_id)
@@ -65,15 +65,19 @@ def detail(request, id):
     return render(request, 'main/detail.html', {'post':post, 'comments':all_comments})
 
 def update_comment(request, post_id, comment_id):
-    update_comment = Comment.objects.get(comment_id=comment_id)
+    update_comment = Comment.objects.get(id=comment_id)
     update_comment.writer = request.user
     update_comment.pub_date = timezone.now()
-    update_comment.content = request.POST['content']
+    update_comment.content = request.Comment['content']
     update_comment.post = get_object_or_404(Post, pk=post_id)
     update_comment.save()
-    return redirect('main:detail', update_comment.comment_id)
+    return redirect('main:detail', post_id)
 
 def delete_comment(request, post_id, comment_id):
     delete_comment = Comment.objects.get(id=comment_id)
     delete_comment.delete()
     return redirect('main:detail', post_id)
+
+def edit_comment(request, id):
+    edit_comment = Comment.objects.get(id = id)
+    return render(request, 'main/edit_comment.html', {'post':edit_comment})
