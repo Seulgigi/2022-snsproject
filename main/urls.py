@@ -15,5 +15,7 @@ urlpatterns = [
     path('<str:post_id>/create_comment', create_comment, name="create_comment"),
     path('<str:comment_id>/update_comment', update_comment, name="update_comment"),
     path('<str:comment_id>/delete_comment', delete_comment, name="delete_comment"),
-    path('<str:comment_id>/edit_comment', edit_comment, name="edit_comment")
+    path('<str:comment_id>/edit_comment', edit_comment, name="edit_comment"),
+    path('like_toggle/<str:post_id>/', like_toggle, name="like_toggle"),
+    path('my_like/<str:user_id>', my_like, name='my_like'),
 ]

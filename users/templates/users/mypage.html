@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-    <h1>{{user.username}}</h1>
+<div class="post_list">
+    <h1>글 목록</h1>
     <div>
         {% for post in posts %}
 
@@ -11,6 +11,20 @@
 
         {% endfor %}
     </div>
+</div>
+
+<div class="like_list">
+    <h1>좋아요 목록</h1>
+    {% for like in like_list %}
+    <div>
+        {% if like.post.image %}
+            <a href="#">
+                <img src="{{ like.post.image.url }}" alt="...">
+            </a>
+        {% endif %}
+            <a href="{% url 'main:detail' post.id %}">{{post.title}}</a><hr>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
