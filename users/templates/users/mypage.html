@@ -2,6 +2,29 @@
 {% load static %}
 {% block content %}
 
+<div class="follow_list">
+    {{ user.username }}
+    {% if request.user != user %}
+        {% if request.user.profile in user.profile.followers.all %}
+            <a href="{% url 'users:follow' user.id %}"><button type="button" class="btn btn-outline-info">unfollow</button></a>
+        {% else %}
+            <a href="{% url 'users:follow' user.id %}"><button type="button" class="btn btn-outline-info">follow</button></a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div>
+    팔로워{{ user.profile.followers.count }}명
+    {%for follower in user.profile.followers.all %}
+        <a href="{% url 'users:mypage' follower.user.id %}">{{ follower.user.username }}</a>
+    {% endfor %}
+
+    팔로잉{{ user.profile.followings.count }}명
+    {% for following in user.profile.followings.all %}
+        <a href="{%url 'users:mypage' following.user.id %}">{{ following.user.username }}</a>
+    {% endfor %}
+</div>
+
 <div class="post_list">
     <h1>글 목록</h1>
     <div>
@@ -13,18 +36,5 @@
     </div>
 </div>
 
-<div class="like_list">
-    <h1>좋아요 목록</h1>
-    {% for like in like_list %}
-    <div>
-        {% if like.post.image %}
-            <a href="#">
-                <img src="{{ like.post.image.url }}" alt="...">
-            </a>
-        {% endif %}
-            <a href="{% url 'main:detail' post.id %}">{{post.title}}</a><hr>
-    </div>
-    {% endfor %}
-</div>
 
 {% endblock %}
