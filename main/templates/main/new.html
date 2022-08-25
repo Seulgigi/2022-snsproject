@@ -2,13 +2,38 @@
 {% load static %}
 
 {% block content %}
+<div class="new">
+    <div class="new1">
+        VISIT WRITE
+    </div>
 
-<form action="{% url 'main:create' %}" method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-    <p>제목 : <input type="text" name="title"></p>
-    <p>사진 : <input type="file" name="image"></p>
-    <p>내용 : <textarea type="text" name="body" id="" cols="30" rows="10"></textarea></p>
-    <button type="submit">제출</button>
-</form>
+    <div class="new2">
+        <div class="new2_box">
+            <form class="new2_form" action="{% url 'main:create' %}" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div id="new2_form">
+                    <div id="new2_form_title">TITLE</div>
+                    <div id="new2_form_content"><input type="text" name="title" required></div>
+                </div>
+                
+                <div id="new2_form">
+                    <div id="new2_form_title">IMG</div>
+                    <div id="new2_form_content"><input style="border: none;" type="file" name="image" required></div>
+                </div>
+                
+                <div id="new2_form">
+                    <div id="new2_form_title">CONTENT</div>
+                    <div id="new2_form_content"><textarea type="text" name="body" id="" cols="30" rows="10" required></textarea></div>
+                </div>
+
+                <div class="new2_btn">
+                    <button id="new2_btn" type="submit">제출</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}

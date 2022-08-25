@@ -2,33 +2,36 @@
 {% load static %}
 
 {% block content %}
-<body background="{% static 'images/background.png'%}" style="background-repeat: no-repeat; background-size: cover;">
-    <div class="main-box" style="float: right;">
-        <div class="name" style="margin-top: 200px; margin-right: 300px;">
-            <img class="face" style="padding-bottom: 30px; width: 400px; height: 400px; border-radius: 50%;" src="{% static 'images/face.png' %}">
-            <div class="hi" style="padding-left: 60px;">
-                <h2 style="font-size: 60px; font-weight: lighter;">Ryu Seulgi</h2> 
-            </div>
-            
-        </div>
-    </div>
-    
-    <div class="box" style="font-weight: lighter; float: left; text-align: left;">
-        <div class="ABOUT_ME" style="margin-left: 20px; margin-top: 200px;">
-            <div>
-                <p class="about" style="margin-top: 150px; margin-bottom: 50px; font-size: 50px;">ABOUT ME</p>
-                <hr align="right" style="border: solid 1px #2b2b2b; width: 500px; margin-bottom: 30px;">
-                <p style="font-size: 20px; margin-bottom: 30px;">Department of Industrial & Systems Engineering
+
+<link rel="stylesheet" href="{% static 'css/mainpage.css' %}">
+
+<!-- <div background="{% static 'images/background.png'%}" style="background-repeat: no-repeat; background-size: cover; height: 100%;"> -->
+<div class="main_1">
+    <div class="main_1_box">
+        <div class="main_1_ABOUT_ME">
+                <p class="main_1_about">ABOUT ME</p>
+                <hr style="border: solid 1px #939393; width: 100%; margin-bottom: 30px;">
+                <p>Department of Industrial & Systems Engineering
                     <br>&
                     <br>Software Convergence Interdisciplinary Major
                 </p>
-                <p style="font-size: 20px; margin-bottom: 30px;">02.12.05</p>
-                <p style="font-size: 20px; margin-bottom: 30px;"><a href="https://www.instagram.com/slg__i/">slg__i</a></p>
-                <p style="font-size: 20px; margin-bottom: 30px;"><a href="{% url 'main:firstpage' %}">SNS_PROJECT</a></p>
-                <p style="font-size: 20px; margin-bottom: 30px;">slki1205@naver.com</p>
-                <p style="font-size: 20px; margin-bottom: 30px;">+82 2549 3017</p>
+                <p>02.12.05</p>
+                <p><a id="main_link" href="https://github.com/Seulgigi">GITHUB</a></p>
+                <p><a id="main_link" href="https://www.instagram.com/slg__i/">slg__i</a></p>
+                <!-- <p><a id="main_link" href="{% url 'main:firstpage' %}">SNS_PROJECT</a></p>  // -->
+                <p>slki1205@naver.com / 2021112414@dgu.ac.kr</p>
+                <p>+82 2549 3017</p>
+        </div>
+    </div>
+
+    <div class="main_2_box">
+        <div class="main_2_name">
+            <img class="main_2_face" src="{% static 'images/face.png' %}">
+            <div class="main_2_hi">
+                Ryu Seulgi
             </div>
         </div>
     </div>
-</body>
+</div>
+<!-- </div> -->
 {% endblock %}

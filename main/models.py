@@ -10,7 +10,7 @@ class Post(models.Model):
     writer = models.ForeignKey(User,on_delete=models.CASCADE)
     pub_date = models.DateTimeField()
     body = models.TextField()
-    image = models.ImageField(upload_to = "post/", blank=True, null=True)
+    image = models.ImageField(upload_to = "post/")
     like_user_set = models.ManyToManyField(User, blank=True, related_name='like_user_set', through='Like')
     dislike_user_set = models.ManyToManyField(User, blank=True, related_name='dislike_user_set', through='DisLike')
 

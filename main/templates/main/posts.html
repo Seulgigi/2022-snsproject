@@ -2,35 +2,58 @@
 {% load static %}
 
 {% block content %}
-{% if user.is_authenticated %}
 
-    <br>
-    <h1>글 목록</h1><br>
-    <div>
+<div class="post">
 
-        {% for post in posts %}
-        <div>
-            <h1>{{post.title}}</h1>
-            {% if post.writer %}
-                {% if 'user' in post.writer.username %}
-                    <h3>작성자 : {{ post.writer.last_name }} {{ post.writer.first_name }}</h3>
-                {% else %}
-                    <h3>작성자 : {{ post.writer }}</h3>
-                {% endif %}
-            {% else %}
-                <h3>작성자 : 알 수 없음</h3>
-            {% endif %}
-            
-            {{post.summary}}<br>
-            <a href="{% url 'main:detail' post.id %}">...자세히</a><hr>
-        </div>
-        {% endfor %}
+    <div class="post_1">
+        VISIT LIST
     </div>
-    {% else %}
 
-    <a href="{% url 'account_login' %}" class="btn btn-warning">로그인</a>
-    <a href="{% url 'account_signup' %}" class="btn btn-warning">회원가입</a>
+    <div class="post_2">
+        {% if user.is_authenticated %}
+        <a class="post2_btn" href="{% url 'main:new' %}">WRITE</a>
+        {% else %}
+        <a class="post2_btn" onclick="alert('로그인 후 이용해주세요.')">WRITE</a>
+        {% endif %}
+    </div>
 
-    {% endif %}
+    <div class="post_3">
+        <div class="post3_box">
+            <div class="post3_box_posts" style="width: 100%; display:flex;">
+                {% for post in posts %}
+                <div class="post3_box_onepost">
+                    <a href="{% url 'main:detail' post.id %}">
+                        <div id="post3_box_onepost_title">{{ post.title }}</div>
+
+                        {% if post.image %}
+                        <div class="post3_box_onepost_img"><img id="post3_box_onepost_img" src="{{post.image.url}}" alt="사진"></div>
+                        {% endif %}
+
+                        <div id="post3_box_onepost_writer">
+                            {% if post.writer %}
+                                {% if 'user' in post.writer.username %}
+                                    {{ post.writer.last_name }}{{ post.writer.first_name }}
+                                {% else %}
+                                    {{ post.writer }}
+                                {% endif %}
+                            {% else %}
+                                Anonymity
+                            {% endif %}
+                        </div>
+
+                        <div id="post3_box_onepost_summary">{{ post.summary }}</div>
+                    </a>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+
+
 
 {% endblock %}

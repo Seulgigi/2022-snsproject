@@ -1,0 +1,45 @@
+.main_1{
+    display: inline-flex;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.main_1_box{
+    width: 60%;
+    margin: 5%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.main_1_ABOUT_ME{
+    line-height: 50px;
+    font-size: 17px;
+    padding: 2% 10%;
+    color: #959595;
+}
+
+.main_1_about{
+    font-size: 20px;
+}
+
+
+#main_link{
+    color: #959595;
+    text-decoration: none;
+}
+
+.main_2_box{
+    margin: 5%;
+    width: 30%;
+}
+
+.main_2_face{
+    border-radius: 50%;
+    margin-top: 5%;
+}
+
+.main_2_hi{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 5%;
+}

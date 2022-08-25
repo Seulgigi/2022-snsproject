@@ -1,0 +1,173 @@
+.detatil_1{
+    width: 80%;
+    margin: 2% 10%;
+    display: inline-flex;
+    border-bottom: 3px solid white;
+    padding-bottom: 2%;
+}
+
+.detail_1_1{
+    padding-top: 2%;
+    font-size: 17px;
+    line-height: 35px;
+    width: 90%;
+    padding-left: 2%;
+}
+
+.detail_post{
+    color: #959595;
+}
+
+.detail_title{
+    padding-left: 2%;
+    font-family: "AppleSDGothicNeoB";
+    font-size: 25px;
+}
+
+.detail_writer{
+    font-size: 15px;
+    color: #959595;
+}
+
+.detail_writer a{
+    text-decoration: none;
+    color: #959595;
+}
+
+.detail_1_2{
+    width: 10%;
+    font-size: 15px;
+}
+
+.detail_1_2_btn{
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    width: 50%;
+    padding: 5% 2%;
+
+}
+
+.detail_1_2_btn a{
+    text-decoration: none;
+    color: #000;
+}
+
+.detail_2{
+    border-bottom: 3px solid white;
+    width: 76%;
+    margin: 1% 10%;
+    padding: 0 2%;
+    padding-bottom: 3%;
+}
+
+#detail_2_img{
+    border-radius: 5px;
+    width: 40%;
+}
+
+.detail_2_img{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.detail_body{
+    text-align: center;
+    width: 80%;
+    margin: 0 10%;
+}
+
+.detail_like{
+    border-bottom: 3px solid white;
+    width: 80%;
+    margin: 1% 10%;
+    display: inline-flex;
+    font-size: 17px;
+    line-height: 40px;
+    padding-bottom: 2%;
+}
+
+#detail_like_like{
+    padding: 0 5%;
+
+}
+
+.detail_3{
+    width: 80%;
+    margin: 1% 10%
+}
+
+#detail_3{
+    width: 90%;
+    margin: 0% 5%;
+    display: inline-flex;
+}
+
+#detail_3 textarea{
+    resize: none;
+    width: 80%;
+    height: 10vh;
+}
+
+.detail_3_1_btn{
+    width: 20%;
+    text-align: center;
+}
+
+#detail_3_1_btn{
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    width: 40%;
+    height: 35%;
+}
+
+.detail_4{
+    width: 70%;
+    margin: 2% 15%;
+    font-size: 17px;
+}
+
+.detail_4_1{
+    display: inline-flex;
+    width: 100%;
+    margin: 1% 0;
+}
+
+.detail_4_1_writer{
+    width: 12%;
+    text-align: center;
+    border-right: 1px solid #959595;
+}
+
+.detail_4_1_content{
+    width: 75%;
+    margin-left: 3%;
+}
+
+.detail_4_1_time{
+    font-size: 15px;
+    color: #959595;
+}
+
+.detail_4_1_edit{
+    color: #959595;
+    text-align: center;
+    width: 10%;
+}
+
+.detail_4_1_edit a{
+    color: #959595;
+    text-decoration: none;
+}
+
+#detail_4_1_edit_1{
+    border: none;
+    background-color: none;
+    color: #959595;
+    font-size: 15px;
+}
+
+#detail_4_1_edit_form{
+    display: none;
+}
