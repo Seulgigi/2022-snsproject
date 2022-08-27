@@ -4,26 +4,31 @@
 {% block content %}
 <div class="new">
     <div class="new1">
-        EDIT POST
+        LIFE WRITE
     </div>
 
     <div class="new2">
         <div class="new2_box">
-            <form class="new2_form" action="{% url 'main:update' post.id %}" method="post" enctype="multipart/form-data">
+            <form class="new2_form" action="{% url 'main:lifecreate' %}" method="post" enctype="multipart/form-data">
                 {%csrf_token%}
                 <div id="new2_form">
                     <div id="new2_form_title">TITLE</div>
-                    <div id="new2_form_content"><input type="text" name="title" value="{{post.title}}" required></div>
+                    <div id="new2_form_content"><input type="text" name="title" required></div>
                 </div>
                 
                 <div id="new2_form">
                     <div id="new2_form_title">IMG</div>
-                    <div id="new2_form_content"><input style="border: none;" type="file" name="image" value="{{post.image.url}}" required></div>
+                    <div id="new2_form_content"><input style="border: none;" type="file" name="image" required></div>
+                </div>
+
+                <div id="new2_form">
+                    <div id="new2_form_title">TODAY</div>
+                    <div id="new2_form_content"><input type="date" name="day" data-placeholer="day" required style="width: 40%;"></div>
                 </div>
                 
                 <div id="new2_form">
                     <div id="new2_form_title">CONTENT</div>
-                    <div id="new2_form_content"><textarea type="text" name="body" id="" cols="30" rows="10" required>{{post.body}}</textarea></div>
+                    <div id="new2_form_content"><textarea type="text" name="body" id="" cols="30" rows="10" required></textarea></div>
                 </div>
 
                 <div class="new2_btn">

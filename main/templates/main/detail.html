@@ -9,6 +9,20 @@
     color: #959595;
     font-size: 15px;
 }
+
+.detail_5{
+    width: 100%;
+    text-align: center;
+    padding: 5% 0;
+}
+
+.detail_5_btn{
+    font-size: 15px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1% 4%;
+    border: none;
+}
 </style>
 
 <div class="detatil_1">
@@ -18,9 +32,9 @@
         <div class="detail_writer">
             {% if post.writer %}
                 {% if 'user' in post.writer.username %}
-                    <a href="{% url 'users:mypage' post.writer.id %}" >{{ post.writer.last_name }}{{ post.writer.first_name }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
+                    <a href="#" >{{ post.writer.last_name }}{{ post.writer.first_name }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
                 {% else %}
-                    <a href="{% url 'users:mypage' post.writer.id %}" >{{ post.writer }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
+                    <a href="#" >{{ post.writer }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
                 {% endif %}
             {% else %}
             Anonymity
@@ -31,9 +45,9 @@
     <div class="detail_1_2">
         {% if user == post.writer %}
         <br><br>
-        <button  class="detail_1_2_btn" onclick="location.href='/main/posts/'">
+        <button  class="detail_1_2_btn" onclick="location.href='/posts/'">
             <a href="{%url 'main:edit' post.id%}">수정</a></button> <br><br>
-        <button  class="detail_1_2_btn" onclick="location.href='/main/posts/'">
+        <button  class="detail_1_2_btn" onclick="location.href='/posts/'">
             <a href="{%url 'main:delete' post.id%}">삭제</a></button>
         {% endif %}
     </div>
@@ -50,11 +64,11 @@
     <span id="detail_like_like" href="#" class="like" name ="{{post.id}}" value="Like">
         {% if user in post.like_user_set.all %}
             <div class="alt-service-icon">
-                <i class="fas fa-heart" id ="like-icon" style="color:red;"></i>
+                <i class="fa-solid fa-thumbs-up" id ="like-icon" style="color:red;"></i>
             </div>
         {% else %}
                 <div class="alt-service-icon">
-                <i class="far fa-heart" id ="like-icon" style="color:red;"></i>
+                <i class="fa-regular fa-thumbs-up" id ="like-icon" style="color:red;"></i>
             </div>
         {% endif %}
             <span id="count-{{ post.id }}" class="alt-services-title font-alt">
@@ -73,7 +87,7 @@
             </div>
         {% else %}
                 <div class="alt-service-icon">
-                    <i class="fa-light fa-thumbs-down" id ="dislike-icon" style="color:blue;"></i>
+                    <i class="fa-regular fa-thumbs-down" id ="dislike-icon" style="color:blue;"></i>
             </div>
         {% endif %}
             <span id="count-{{ post.id }}" class="alt-services-title font-alt">
@@ -103,11 +117,11 @@
                     else{
                         if(response.like_result=='like'){
                         $('#like-icon').removeClass();
-                            $('#like-icon').addClass('fas fa-heart');
+                            $('#like-icon').addClass('fa-solid fa-thumbs-up');
                         }
                         else{
                             $('#like-icon').removeClass();
-                            $('#like-icon').addClass('far fa-heart');
+                            $('#like-icon').addClass('fa-regular fa-thumbs-down');
                         }
                         $('#count-{{post.id}}').html('좋아요 '+response.like_count+"개");
                     }
@@ -176,7 +190,7 @@
         <div class="detail_4_1_time">{{comment.created_at}}</div>
         <form id="detail_4_1_edit_form" action="{% url 'main:update_comment' comment.id %}" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
-            <p>내용 : <textarea name="body" id="" cols="30" rows="10">{{ post.comment }}</textarea></p>
+            <p>내용 : <textarea name="body" id="" cols="30" rows="10">{{ comment.content }}</textarea></p>
             <button type="submit">제출</button>
         </form>
       </div>

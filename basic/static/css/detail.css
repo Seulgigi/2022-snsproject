@@ -171,3 +171,12 @@
 #detail_4_1_edit_form{
     display: none;
 }
+
+.detail_5{
+    width: 100%;
+    text-align: center;
+}
+
+.detail_5_btn{
+    text-align: center;
+}

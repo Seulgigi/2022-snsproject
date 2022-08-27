@@ -1,18 +1,19 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from matplotlib.style import context
 from main.models import Post
+from .models import *
 from django.contrib.auth.models import User
 
 # Create your views here.
 def mypage(request):
     user = request.user
 
-    context={
-        'user':user,
-        'posts':Post.objects.filter(writer=user),
-        'followings':user.profile.followings.all(),
-        'followers':user.profile.followers.all(),
-    }
+    # context={
+    #     'user':user,
+    #     'posts':Post.objects.filter(writer=user),
+    #     'followings':user.profile.followings.all(),
+    #     'followers':user.profile.followers.all(),
+    # }
     
     posts=Post.objects.filter(writer=user)
     return render(request,'users/mypage.html',{'posts':posts})
@@ -26,6 +27,7 @@ def signup(request):
         return render(request, 'signup.html')
     elif request.method == "POST":
         user = request.POST['user']
+        email = request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
@@ -35,10 +37,17 @@ def signup(request):
             print(res_data)
         else :
             profile = Profile(
-                user = user, password1 = password1, password2 = password2,
+                user = user, email=email, password1 = password1, password2 = password2,
             ) # 객체생성
             profile.save()
     return render(request, 'signup.html')
+
+def emoji(request):
+    if request.method == "POST":
+        profile = Profile.objects.get(user=request.user)
+        profile.img = request.FILES.get('img')
+        profile.save(update_fields=['img'])
+    return redirect('users:mypage')
 
 
 def follow(request, id):

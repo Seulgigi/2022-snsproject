@@ -3,6 +3,7 @@ from .views import *
 
 app_name = "users"
 urlpatterns = [
-    path('<str:id>/mypage/', mypage, name="mypage"),
-    path('<str:id>/follow/', follow, name="mypage"),
+    path('mypage/', mypage, name="mypage"),
+    path('emoji/', emoji, name="emoji"),
+    path('<str:id>/follow/', follow, name="follow"),
 ]

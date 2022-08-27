@@ -1,40 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 
-<div class="follow_list">
-    {{ user.username }}
-    {% if request.user != user %}
-        {% if request.user.profile in user.profile.followers.all %}
-            <a href="{% url 'users:follow' user.id %}"><button type="button" class="btn btn-outline-info">unfollow</button></a>
-        {% else %}
-            <a href="{% url 'users:follow' user.id %}"><button type="button" class="btn btn-outline-info">follow</button></a>
-        {% endif %}
-    {% endif %}
-</div>
-
-<div>
-    팔로워{{ user.profile.followers.count }}명
-    {%for follower in user.profile.followers.all %}
-        <a href="{% url 'users:mypage' follower.user.id %}">{{ follower.user.username }}</a>
-    {% endfor %}
-
-    팔로잉{{ user.profile.followings.count }}명
-    {% for following in user.profile.followings.all %}
-        <a href="{%url 'users:mypage' following.user.id %}">{{ following.user.username }}</a>
-    {% endfor %}
-</div>
-
-<div class="post_list">
-    <h1>글 목록</h1>
-    <div>
-        {% for post in posts %}
-
-        <a href="{% url 'main:detail' post.id %}">{{post.title}}</a><hr>
-
-        {% endfor %}
+<div class="main_1">
+    <div class="main_1_box">
+        <div class="mypage_title">MY PAGE</div>
+        <div class=""></div>
+        {{user.username}}
     </div>
+
+    <div class="main_2_box">
+        <div class="main_2_name">
+            {% if request.user.profile.img %}
+            <img class="main_2_face" src="{{request.user.profile.img.url}}" style="width: 100%;">
+            {% else %}
+            <form class="emoji_form" id="emoji_form" action="{% url 'users:emoji' %}" method="POST" enctype="multipart/form-data">
+                <div style="padding-top: 30%;">
+                    <div id="emoji_btn">+ emoji
+                    {% csrf_token %}
+                    <input type="file" name="img" onchange="formSubmit()"></div>
+                </div>
+            </form>
+            {% endif %}
+            <div class="main_2_hi">
+                {{user.username}}
+            </div>
+        </div> 
+    </div>
+    <script>
+        function formSubmit(){
+            emoji_form.submit()
+        }
+    </script>
+
 </div>
-
-
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Comment, Like, DisLike, User
+from .models import Post, Comment, Like, DisLike, User, LifePost
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -13,6 +13,53 @@ def showmain(request) :
 
 def firstpage(request) :
     return render(request, 'main/firstpage.html')
+
+# life page
+
+def lifeposts(request):
+    lifepost = LifePost.objects.all()
+    lifeposts = lifepost.all().order_by('-day')
+    # 최근 날짜 순서로 뜨기
+    return render(request, 'main/lifeposts.html', {'lifeposts':lifeposts})
+
+def lifedetail(request, id):
+    lifepost = get_object_or_404(LifePost, pk = id)
+    # all_comments = post.comments.all().order_by('-created_at')/
+    return render(request, 'main/lifedetail.html', {'lifepost':lifepost})
+
+def lifenew(request) :
+    return render(request, 'main/lifenew.html')
+
+def lifecreate(request):
+    new_lifepost = LifePost()
+    new_lifepost.title = request.POST['title']
+    new_lifepost.body = request.POST['body']
+    new_lifepost.day = request.POST['day']
+    new_lifepost.image = request.FILES.get('image')
+    new_lifepost.save()
+    return redirect('main:lifeposts')
+
+def lifeedit(request, id):
+    edit_lifepost = LifePost.objects.get(id = id)
+    return render(request, 'main/lifeedit.html', {'lifepost':edit_lifepost})
+
+def lifeupdate(request, id):
+    update_lifepost = LifePost.objects.get(id=id)
+    update_lifepost.title = request.POST['title']
+    update_lifepost.body = request.POST['body']
+    update_lifepost.day = request.POST['day']
+    update_lifepost.image = request.FILES.get('image')
+    update_lifepost.save()
+    return redirect('main:lifeposts')
+
+def lifedelete(request, id):
+    delete_lifepost = LifePost.objects.get(id=id)
+    delete_lifepost.delete()
+    return redirect('main:lifeposts')
+
+
+
+# visit page///
 
 def posts(request):
     posts = Post.objects.all()
@@ -100,7 +147,7 @@ def like_toggle(request, post_id):
     
     if not post_dislike_created:
         post_dislike.delete()
-        dislike_result = "like_cancel"
+        dislike_result = "disslike_cancel"
 
     else: dislike_result = "dislike"
 

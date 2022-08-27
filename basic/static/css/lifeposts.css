@@ -1,0 +1,54 @@
+.lifepost_2{
+    width: 80%;
+    margin: 0 10%;
+    padding-bottom: 5%;
+}
+
+.lifepost_box_onebox{
+    width: 60%;
+    margin: 5% 10%;
+    padding: 5% 10%;
+    background-color: white;
+    box-shadow: 2px 2px 10px #959595;
+    border-radius: 20px;
+}
+
+.lifepost_edit_btn{
+    text-align: right;
+    color: #959595;
+    width: 100%;
+}
+
+.lifepost_edit_btn a {
+    text-decoration: none;
+    color: #959595;
+    font-size: 17px;
+}
+
+.lifepost_edit_btn a i{
+    color: #959595;
+}
+
+.lifepost_box_onebox_title{
+    font-family: "AppleSDGothicNeoEB";
+    font-size: 35px;
+}
+
+.lifepost_box_onebox_day{
+    font-size: 17px;
+    color: #959595;
+}
+
+.lifepost_box_onebox_image{
+    width: 100%;
+}
+
+#lifepost_box_onebox_image{
+    width: 60%;
+    margin: 0% 20%;
+}
+
+.lifepost_box_onebox_body{
+    padding-top: 5%;
+    font-size: 17px;
+}

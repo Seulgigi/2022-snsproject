@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    a{
+        color: #959595;
+    }
+</style>
+
+<div class="post">
+
+    <div class="post_1">
+        SEULGI'S LIFE
+    </div>
+
+    <!-- 관리자에게만 write 버튼 뜨게 하기 -->
+    {% if perms.accounts.manager %}
+    <div class="post_2">
+        <a class="post2_btn" href="{% url 'main:lifenew' %}">WRITE</a>
+    </div>
+    {% endif %}
+
+
+    <div class="lifepost_2">
+        <div class="lifepost_box">
+            {% for lifepost in lifeposts %}
+            <div class="lifepost_box_onebox">
+                <!-- 관리자에게만 수정, 삭제 버튼 뜨게 하기 -->
+                {% if perms.accounts.manager %}
+                <div class="lifepost_edit_btn" style="text-align: right; color: #959595;"><a href="{% url 'main:lifeedit' lifepost.id %}"><i class="fa-solid fa-pen"></i></a>
+                    <a href="{% url 'main:lifedelete' lifepost.id %}"><i class="fa-solid fa-trash-can"></i></a></div>
+                {% endif %}
+                <div class="lifepost_box_onebox_title">{{lifepost.title}}</div>
+                <div class="lifepost_box_onebox_day">{{lifepost.day}}</div>
+                <div class="lifepost_box_onebox_image"><img id="lifepost_box_onebox_image" src="{{lifepost.image.url}}" alt="사진"></div>
+                <div class="lifepost_box_onebox_body">{{lifepost.body}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+
+    <!-- <div class="post_3">
+        <div class="post3_box">
+            <div class="post3_box_posts" style="width: 100%; display:flex;">
+                {% for lifepost in lifeposts %}
+                <div class="post3_box_onepost">
+                    <a href="{% url 'main:lifedetail' lifepost.id %}">
+                        <div id="post3_box_onepost_title">{{ lifepost.title }}</div>
+
+                        {% if lifepost.image %}
+                        <div class="post3_box_onepost_img"><img id="post3_box_onepost_img" src="{{lifepost.image.url}}" alt="사진"></div>
+                        {% endif %}
+
+                        <div id="post3_box_onepost_writer">
+                            {% if post.writer %}
+                                {% if 'user' in post.writer.username %}
+                                    {{ post.writer.last_name }}{{ post.writer.first_name }}
+                                {% else %}
+                                    {{ post.writer }}
+                                {% endif %}
+                            {% else %}
+                                Anonymity
+                            {% endif %}
+                        </div>
+
+                        <div id="post3_box_onepost_summary">{{ lifepost.body }}</div>
+                    </a>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        
+        </div>
+    </div> -->
+</div>
+
+
+
+
+
+{% endblock %}
