@@ -83,3 +83,13 @@ mypage.html */
     color: #959595; 
     border-bottom: 3px solid whitesmoke;
 }
+
+.mypage_visitlist_title{
+    margin: 3% 5%;
+    padding-bottom: 2%;
+    width: 90%;
+    font-family: "AppleSDGothicNeoEB";
+    font-size: 35px;
+    color: #959595; 
+    border-bottom: 3px solid whitesmoke;
+}

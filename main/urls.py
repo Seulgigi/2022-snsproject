@@ -24,5 +24,6 @@ urlpatterns = [
     path('<str:comment_id>/delete_comment', delete_comment, name="delete_comment"),
     path('<str:comment_id>/edit_comment', edit_comment, name="edit_comment"),
     path('like_toggle/<str:post_id>/', like_toggle, name="like_toggle"),
+    # path('dislike_toggle/<str:post_id>/', dislike_toggle, name="dis/like_toggle"),
     path('my_like/<str:user_id>', my_like, name='my_like'),
 ]

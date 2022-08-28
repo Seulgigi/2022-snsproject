@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 import json
+from django.contrib.auth.decorators import permission_required
 
 
 def showmain(request) :
@@ -27,9 +28,11 @@ def lifedetail(request, id):
     # all_comments = post.comments.all().order_by('-created_at')/
     return render(request, 'main/lifedetail.html', {'lifepost':lifepost})
 
+@permission_required('users.manager', raise_exception=True)
 def lifenew(request) :
     return render(request, 'main/lifenew.html')
 
+@permission_required('users.manager', raise_exception=True)
 def lifecreate(request):
     new_lifepost = LifePost()
     new_lifepost.title = request.POST['title']
@@ -39,10 +42,12 @@ def lifecreate(request):
     new_lifepost.save()
     return redirect('main:lifeposts')
 
+@permission_required('users.manager', raise_exception=True)
 def lifeedit(request, id):
     edit_lifepost = LifePost.objects.get(id = id)
     return render(request, 'main/lifeedit.html', {'lifepost':edit_lifepost})
 
+@permission_required('users.manager', raise_exception=True)
 def lifeupdate(request, id):
     update_lifepost = LifePost.objects.get(id=id)
     update_lifepost.title = request.POST['title']
@@ -52,6 +57,7 @@ def lifeupdate(request, id):
     update_lifepost.save()
     return redirect('main:lifeposts')
 
+@permission_required('users.manager', raise_exception=True)
 def lifedelete(request, id):
     delete_lifepost = LifePost.objects.get(id=id)
     delete_lifepost.delete()
@@ -132,6 +138,8 @@ def delete_comment(request, comment_id):
     delete_comment.delete()
     return redirect('main:detail', delete_comment.post.id)
 
+
+# 좋아요
 @require_POST
 @login_required
 def like_toggle(request, post_id):
@@ -158,6 +166,8 @@ def like_toggle(request, post_id):
         "dislike_result" : dislike_result,
     }
     return HttpResponse(json.dumps(context), content_type = "application/json")
+
+
 
 def my_like(request, user_id):
     user = User.objects.get(id=user.id)

@@ -3,11 +3,56 @@
 
 {% block content %}
 
+<style>
+    .mypage_visitlist_title{
+
+    font-family: "AppleSDGothicNeoLB";
+    font-size: 25px;
+    color: #959595; 
+}
+
+.mypage_visitlist{
+    margin: 3% 8%;
+    padding: 1%;
+    width: 80%;
+}
+</style>
+
 <div class="main_1">
     <div class="main_1_box">
         <div class="mypage_title">MY PAGE</div>
-        <div class=""></div>
-        {{user.username}}
+        
+        <div class="mypage_visitlist">
+            <div class="mypage_visitlist_title">MY VISIT LIST</div>
+            <div class="mypage_visitlist_box">
+                <div class="post3_box_posts" style="width: 100%; display:flex; padding-top: 2%;">
+                    {% for post in posts %}
+                    <div class="post3_box_onepost">
+                        <a href="{% url 'main:detail' post.id %}">
+                            <div id="post3_box_onepost_title">{{ post.title }}</div>
+    
+                            <div class="post3_box_onepost_img" style="height: 50%;"><img id="post3_box_onepost_img" src="{{post.image.url}}" alt="사진"></div>
+    
+                            <div id="post3_box_onepost_writer">
+                                {% if post.writer %}
+                                    {% if 'user' in post.writer.username %}
+                                        {{ post.writer.last_name }}{{ post.writer.first_name }}
+                                    {% else %}
+                                        {{ post.writer }}
+                                    {% endif %}
+                                {% else %}
+                                    Anonymity
+                                {% endif %}
+                            </div>
+    
+                            <div id="post3_box_onepost_summary">{{ post.summary }}</div>
+                        </a>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="main_2_box">
