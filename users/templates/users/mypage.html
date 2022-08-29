@@ -2,38 +2,37 @@
 {% load static %}
 
 {% block content %}
-
 <style>
-    .mypage_visitlist_title{
-
+.mypage_visitlist_title{
+    margin: 3% 5%;
+    padding-bottom: 2%;
+    width: 90%;
     font-family: "AppleSDGothicNeoLB";
     font-size: 25px;
     color: #959595; 
-}
-
-.mypage_visitlist{
-    margin: 3% 8%;
-    padding: 1%;
-    width: 80%;
+    border-bottom: 3px solid whitesmoke;
 }
 </style>
 
 <div class="main_1">
     <div class="main_1_box">
-        <div class="mypage_title">MY PAGE</div>
+
+        <!-- <div class="mypage_title">MY PAGE</div>  -->
+        <div class="mypage_follower">FOLLOWER &nbsp;&nbsp; {{user.profile.followers.count}} &nbsp;&nbsp; | &nbsp;&nbsp; fOLLOWING  &nbsp;&nbsp;{{user.profile.followings.count}}</div>
+
         
         <div class="mypage_visitlist">
-            <div class="mypage_visitlist_title">MY VISIT LIST</div>
+            <div class="mypage_visitlist_title">VISIT LIST</div>
             <div class="mypage_visitlist_box">
                 <div class="post3_box_posts" style="width: 100%; display:flex; padding-top: 2%;">
                     {% for post in posts %}
                     <div class="post3_box_onepost">
                         <a href="{% url 'main:detail' post.id %}">
-                            <div id="post3_box_onepost_title">{{ post.title }}</div>
+                            <div id="post3_box_onepost_title" style="font-size: 15px;">{{ post.title }}</div>
     
                             <div class="post3_box_onepost_img" style="height: 50%;"><img id="post3_box_onepost_img" src="{{post.image.url}}" alt="사진"></div>
     
-                            <div id="post3_box_onepost_writer">
+                            <div id="post3_box_onepost_writer" style="font-size: 12px;">
                                 {% if post.writer %}
                                     {% if 'user' in post.writer.username %}
                                         {{ post.writer.last_name }}{{ post.writer.first_name }}
@@ -45,7 +44,7 @@
                                 {% endif %}
                             </div>
     
-                            <div id="post3_box_onepost_summary">{{ post.summary }}</div>
+                            <div id="post3_box_onepost_summary" style="font-size: 12px;">{{ post.summary }}</div>
                         </a>
                         
                     </div>
@@ -57,20 +56,43 @@
 
     <div class="main_2_box">
         <div class="main_2_name">
-            {% if request.user.profile.img %}
-            <img class="main_2_face" src="{{request.user.profile.img.url}}" style="width: 100%;">
+
+            {% if user.profile.img %}
+            <img class="main_2_face" src="{{user.profile.img.url}}" style="width: 100%;">
             {% else %}
-            <form class="emoji_form" id="emoji_form" action="{% url 'users:emoji' %}" method="POST" enctype="multipart/form-data">
-                <div style="padding-top: 30%;">
-                    <div id="emoji_btn">+ emoji
-                    {% csrf_token %}
-                    <input type="file" name="img" onchange="formSubmit()"></div>
+
+                {% if request.user != user %}
+                <!-- 다른 사람의 프로필에 들어온 경우 -->
+                <div class="emoji_form">
+                    <i class="fa-solid fa-user"></i>
                 </div>
-            </form>
+
+                {% else %}
+                <form class="emoji_form" id="emoji_form" action="{% url 'users:emoji' request.user.profile.id %}" method="POST" enctype="multipart/form-data">
+                    <div style="padding-top: 30%;">
+                        <div id="emoji_btn">+ emoji
+                        {% csrf_token %}
+                        <input type="file" name="img" onchange="formSubmit()"></div>
+                    </div>
+                </form>
+                {% endif %}
+
             {% endif %}
+
+            
             <div class="main_2_hi">
                 {{user.username}}
             </div>
+
+            {% if request.user != user %}
+            <div class="follow_btn">
+                {% if request.user.profile in user.profile.followers.all %}
+                <a href="{% url 'users:follow' user.id %}"><button type="button">UNFOLLOW</button></a>
+                {% else %}
+                <a href="{% url 'users:follow' user.id %}"><button type="button">FOLLOW</button></a>
+                {% endif %}
+            </div>
+            {% endif %}
         </div> 
     </div>
     <script>

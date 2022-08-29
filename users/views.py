@@ -3,20 +3,26 @@ from matplotlib.style import context
 from main.models import Post
 from .models import *
 from django.contrib.auth.models import User
+from django.views.generic.detail import DetailView
 
 # Create your views here.
-def mypage(request):
-    user = request.user
+def mypage(request, id):
+    user = get_object_or_404(User, pk = id)
 
-    # context={
-    #     'user':user,
-    #     'posts':Post.objects.filter(writer=user),
-    #     'followings':user.profile.followings.all(),
-    #     'followers':user.profile.followers.all(),
-    # }
+    context={
+        'user':user,
+        'posts':Post.objects.filter(writer=user),
+        'followings':user.profile.followings.all(),
+        'followers':user.profile.followers.all(),
+    }
     
     posts=Post.objects.filter(writer=user)
-    return render(request,'users/mypage.html',{'posts':posts})
+    return render(request,'users/mypage.html', context)
+
+class ProfileView(DetailView):
+    context_object_name = 'profile_user' # model로 지정해준 User모델에 대한 객체와 로그인한 사용자랑 명칭이 겹쳐버리기 때문에 이를 지정해줌.
+    model = User
+    template_name = 'kilogram/profile.html'
 
 from .models import Profile
 # 해당앱의 views.py 에서 불러와서 Profile 모델을 불러오면 됨
@@ -42,12 +48,15 @@ def signup(request):
             profile.save()
     return render(request, 'signup.html')
 
-def emoji(request):
+def emoji(request, id):
+    # user = request.user
+    # user = get_object_or_404(User, pk=id)
+
     if request.method == "POST":
-        profile = Profile.objects.get(user=request.user)
+        profile = Profile.objects.get(user=request.user, pk=id)
         profile.img = request.FILES.get('img')
         profile.save(update_fields=['img'])
-    return redirect('users:mypage')
+    return redirect('users:mypage', profile.id)
 
 
 def follow(request, id):

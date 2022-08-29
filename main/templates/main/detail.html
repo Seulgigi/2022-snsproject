@@ -32,9 +32,9 @@
         <div class="detail_writer">
             {% if post.writer %}
                 {% if 'user' in post.writer.username %}
-                    <a href="{% url 'users:mypage' %}" >{{ post.writer.last_name }}{{ post.writer.first_name }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
+                    <a href="{% url 'users:mypage' post.writer.id %}" >{{ post.writer.last_name }}{{ post.writer.first_name }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
                 {% else %}
-                    <a href="{% url 'users:mypage' %}" >{{ post.writer }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
+                    <a href="{% url 'users:mypage' post.writer.id %}" >{{ post.writer }}</a>&nbsp; | &nbsp; {{ post.pub_date }}
                 {% endif %}
             {% else %}
             Anonymity

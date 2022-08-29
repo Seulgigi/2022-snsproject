@@ -14,15 +14,15 @@
   </div>
   <!-- <hr id="nav_line"> -->
 
-  <div class="nav_search">
-    search
+  <div class="nav_search" style="display:none;">
+    
   </div>
   <!-- <hr id="nav_line"> -->
 
   <div class="nav4" style="font-size: 20px;">
     {% if user.is_authenticated %}
     <a class="nav4_link" href="{% url 'account_logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-    <a class="nav4_link" href="{% url 'users:mypage' %}"><i class="fa-regular fa-id-card"></i></a>
+    <a class="nav4_link" href="{% url 'users:mypage' user.id %}"><i class="fa-regular fa-id-card"></i></a>
     {% else %}
     <a class="nav4_link" href="{% url 'account_login' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
     <a class="nav4_link" href="{% url 'account_signup' %}"><i class="fa-solid fa-user-plus"></i></a>

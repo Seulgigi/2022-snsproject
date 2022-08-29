@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 import json
 from django.contrib.auth.decorators import permission_required
-
+from django.db.models import Q, query
 
 def showmain(request) :
     posts = Post.objects.all()
@@ -168,7 +168,7 @@ def like_toggle(request, post_id):
     return HttpResponse(json.dumps(context), content_type = "application/json")
 
 
-
+# 내가 좋아요 한 페이지
 def my_like(request, user_id):
     user = User.objects.get(id=user.id)
     like_list = Like.objects.filter(user = user)
